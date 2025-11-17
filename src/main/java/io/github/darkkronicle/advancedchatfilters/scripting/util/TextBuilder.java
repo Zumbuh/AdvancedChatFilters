@@ -169,6 +169,8 @@ public class TextBuilder {
             case SUGGEST_COMMAND -> new ClickEvent.SuggestCommand(value);
             case CHANGE_PAGE -> new ClickEvent.ChangePage(Integer.parseInt(value));
             case COPY_TO_CLIPBOARD -> new ClickEvent.CopyToClipboard(value);
+            case SHOW_DIALOG -> { yield null; }
+            case CUSTOM -> { yield null; }
         };
         applyStyle(style -> style.withClickEvent(event));
         return this;

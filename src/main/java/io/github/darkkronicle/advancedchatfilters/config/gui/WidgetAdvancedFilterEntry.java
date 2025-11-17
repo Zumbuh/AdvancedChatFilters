@@ -123,8 +123,8 @@ public class WidgetAdvancedFilterEntry extends WidgetListEntryBase<ScriptFilter>
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, DrawContext context) {
-        RenderUtils.color(1f, 1f, 1f, 1f);
+    public void render(DrawContext context, int mouseX, int mouseY, boolean selected) {
+        // RenderUtils.color(1f, 1f, 1f, 1f);
 
         // Draw a lighter background for the hovered and the selected entry
         if (selected || this.isMouseOver(mouseX, mouseY)) {
@@ -151,20 +151,21 @@ public class WidgetAdvancedFilterEntry extends WidgetListEntryBase<ScriptFilter>
         }
         String name = this.filter.getDisplayName();
         this.drawString(
+                context,
                 this.x + 4,
                 this.y + 7,
                 Colors.getInstance().getColorOrWhite("white").color(),
-                name,
-                context);
+                name
+        );
 
-        RenderUtils.color(1f, 1f, 1f, 1f);
+        // RenderUtils.color(1f, 1f, 1f, 1f);
         GlStateManager._disableBlend();
 
-        this.drawTextFields(mouseX, mouseY, context);
+        this.drawTextFields(context, mouseX, mouseY);
 
-        super.render(mouseX, mouseY, selected, context);
+        super.render(context, mouseX, mouseY, selected);
 
-        RenderUtils.disableDiffuseLighting();
+        // RenderUtils.disableDiffuseLighting();
     }
 
     private static class ButtonListener implements IButtonActionListener {
@@ -259,7 +260,7 @@ public class WidgetAdvancedFilterEntry extends WidgetListEntryBase<ScriptFilter>
         return ret;
     }
 
-    protected void drawTextFields(int mouseX, int mouseY, DrawContext context) {
+    protected void drawTextFields(DrawContext context, int mouseX, int mouseY) {
         if (this.num != null) {
             this.num.getTextField().render(context, mouseX, mouseY, 0f);
         }
@@ -267,8 +268,8 @@ public class WidgetAdvancedFilterEntry extends WidgetListEntryBase<ScriptFilter>
 
     @Override
     public void postRenderHovered(
-            int mouseX, int mouseY, boolean selected, DrawContext context) {
-        super.postRenderHovered(mouseX, mouseY, selected, context);
+            DrawContext context, int mouseX, int mouseY, boolean selected) {
+        super.postRenderHovered(context, mouseX, mouseY, selected);
 
         List<String> hoverLines;
 
@@ -287,7 +288,7 @@ public class WidgetAdvancedFilterEntry extends WidgetListEntryBase<ScriptFilter>
                     && mouseX < this.buttonStartX
                     && mouseY >= this.y
                     && mouseY <= this.y + this.height) {
-                RenderUtils.drawHoverText(mouseX, mouseY, hoverLines, context);
+                RenderUtils.drawHoverText(context, mouseX, mouseY, hoverLines);
             }
         }
     }
