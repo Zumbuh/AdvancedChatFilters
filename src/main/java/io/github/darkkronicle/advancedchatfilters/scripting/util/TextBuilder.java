@@ -7,6 +7,7 @@
  */
 package io.github.darkkronicle.advancedchatfilters.scripting.util;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -161,10 +162,18 @@ public class TextBuilder {
         if (!clickAction.isUserDefinable()) {
             return this;
         }
-        ClickEvent event = new ClickEvent(clickAction, value);
+        ClickEvent event = switch (clickAction) {
+            case OPEN_URL -> new ClickEvent.OpenUrl(URI.create(value));
+            case OPEN_FILE -> new ClickEvent.OpenFile(value);
+            case RUN_COMMAND -> new ClickEvent.RunCommand(value);
+            case SUGGEST_COMMAND -> new ClickEvent.SuggestCommand(value);
+            case CHANGE_PAGE -> new ClickEvent.ChangePage(Integer.parseInt(value));
+            case COPY_TO_CLIPBOARD -> new ClickEvent.CopyToClipboard(value);
+        };
         applyStyle(style -> style.withClickEvent(event));
         return this;
     }
+
 
     /**
      * Set's the {@link Text} that will be shown on hover.
@@ -172,7 +181,7 @@ public class TextBuilder {
      * @param hoverText Text for hover
      */
     public TextBuilder setHoverText(Text hoverText) {
-        HoverEvent hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverText);
+        HoverEvent hover = new HoverEvent.ShowText(hoverText);
         applyStyle(style -> style.withHoverEvent(hover));
         return this;
     }

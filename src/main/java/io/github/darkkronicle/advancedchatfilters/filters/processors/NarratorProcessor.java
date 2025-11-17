@@ -53,7 +53,7 @@ public class NarratorProcessor implements IMatchProcessor, IScreenSupplier, IJso
         @Override
         public io.github.darkkronicle.Konstruct.parser.Result parse(ParseContext context, List<Node> input) {
             io.github.darkkronicle.Konstruct.parser.Result r1 = Function.parseArgument(context, input, 0);
-            Narrator.getNarrator().say(r1.getContent().getString(), false);
+            Narrator.getNarrator().say(r1.getContent().getString(), false, 1F);
             return io.github.darkkronicle.Konstruct.parser.Result.success(new NullObject());
         }
 
@@ -75,7 +75,7 @@ public class NarratorProcessor implements IMatchProcessor, IScreenSupplier, IJso
     @Override
     public Result processMatches(Text text, Text unfiltered, SearchResult search) {
         String content = search.getGroupReplacements(message.config.getStringValue(), 0);
-        Narrator.getNarrator().say(content, false);
+        Narrator.getNarrator().say(content, false, 1F);
         return Result.getFromBool(true);
     }
 

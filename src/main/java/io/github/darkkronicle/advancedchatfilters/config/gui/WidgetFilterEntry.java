@@ -7,6 +7,7 @@
  */
 package io.github.darkkronicle.advancedchatfilters.config.gui;
 
+import com.mojang.blaze3d.opengl.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
@@ -166,7 +167,7 @@ public class WidgetFilterEntry extends WidgetListEntryBase<Filter> {
                 context);
 
         RenderUtils.color(1f, 1f, 1f, 1f);
-        RenderSystem.disableBlend();
+        GlStateManager._disableBlend();
 
         this.drawTextFields(mouseX, mouseY, context);
 
