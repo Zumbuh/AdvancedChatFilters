@@ -20,11 +20,11 @@
     ]
   },
   "depends": {
-    "fabricloader": ">=0.17.0",
+    "fabricloader": ">=0.17.1",
     "fabric": "*",
-    "minecraft": ">=1.21.7",
-    "malilib": ">=0.25.2",
-    "advancedchatcore": ">=1.5.10-1.21.7"
+    "minecraft": ">=1.21.8",
+    "malilib": ">=0.25.5",
+    "advancedchatcore": ">=1.5.10-1.21.8"
   },
   "custom": {
     "acmodule": true,
